@@ -278,7 +278,8 @@ The authentication CONTINUE packet body
 	def encode(self):
 		"Encode a packet ready for the wire. Returns the completed packet."
 		if self._subtype == TAC_PLUS_AUTHEN_START:
-			self._body = struct.pack(
+			# add self._startstr to fix argu error
+			self._body = struct.pack(self._startstr,
 				self.getField('action', 0),
 				self.getField('priv_lvl', 0),
 				self.getField('authen_type', 0),
